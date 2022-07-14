@@ -2,7 +2,15 @@ function encrypt() {
 	try {
 		const plainText = document.getElementById("plain_text").value;
 		const cipher = document.getElementById("cipher_key").value;
-		const simpleCrypto = new SimpleCrypto(cipher);
+		const salt = document.getElementById("salt").value;
+		const cb = document.getElementById("salt_cb").checked;
+		let cipher_text = "";
+		if (cb) {
+			cipher_text = `${salt}-${cipher}`;
+		} else {
+			cipher_text = `${cipher}-${salt}`;
+		}
+		const simpleCrypto = new SimpleCrypto(cipher_text);
 		const encryptedText = simpleCrypto.encrypt(plainText);
 		document.getElementById("encrypted_text").value = encryptedText;
 	} catch (err) {
@@ -15,7 +23,15 @@ function decrypt() {
 	try {
 		const encryptedText = document.getElementById("encrypted_text").value;
 		const cipher = document.getElementById("cipher_key").value;
-		const simpleCrypto = new SimpleCrypto(cipher);
+		const salt = document.getElementById("salt").value;
+		const cb = document.getElementById("salt_cb").checked;
+		let cipher_text = "";
+		if (cb) {
+			cipher_text = `${salt}-${cipher}`;
+		} else {
+			cipher_text = `${cipher}-${salt}`;
+		}
+		const simpleCrypto = new SimpleCrypto(cipher_text);
 		const decipherText = simpleCrypto.decrypt(encryptedText);
 		document.getElementById("plain_text").value = decipherText;
 	} catch (err) {
@@ -25,20 +41,22 @@ function decrypt() {
 }
 
 function toggle(id_cb, id_ele) {
-	const passwordEle = document.getElementById(id_ele);
-	const type = passwordEle.getAttribute('type');
 	const cb = document.getElementById(id_cb).checked;
-	if (cb) {
-		passwordEle.setAttribute(
-			'type',
-			'password'
-		);
-	} else {
-		passwordEle.setAttribute(
-			'type',
-			'text'
-		);
-	}
+	id_ele.forEach((element) => {
+		const passwordEle = document.getElementById(element);
+		const type = passwordEle.getAttribute('type');
+		if (cb) {
+			passwordEle.setAttribute(
+				'type',
+				'password'
+			);
+		} else {
+			passwordEle.setAttribute(
+				'type',
+				'text'
+			);
+		}
+	});
 }
 
 function copy(id) {
