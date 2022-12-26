@@ -86,8 +86,13 @@
 		</div>
 		<div class="text-center">
 			<input type="checkbox" class="custom-control-input" id="cipher_key_cb"
-				onclick="toggle('cipher_key_cb',['cipher_key','salt']);" checked>
-			<label class="custom-control-label" for="cipher_text_cb">Hide Cipher & Salt</label>
+				onclick="toggle('cipher_key_cb',['cipher_key']);" checked>
+			<label class="custom-control-label" for="cipher_text_cb">Hide Cipher</label>
+		</div>
+		<div class="text-center">
+			<input type="checkbox" class="custom-control-input" id="salt_key_cb"
+				onclick="toggle('salt_key_cb',['salt']);" checked>
+			<label class="custom-control-label" for="cipher_text_cb">Hide Salt</label>
 		</div>
 	</div>
 </body>
