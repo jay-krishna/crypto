@@ -6,7 +6,7 @@ Simple Encryption Decryption web based utility.
 *Scope of Improvement:*
 
 - More responsive web page design.
-
 - Hybrid website for mobile.
+- Dark Mode
 
 Library used: [simple-crypto-js](https://simplecrypto.js.org/)
