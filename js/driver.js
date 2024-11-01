@@ -1,3 +1,7 @@
+function hasLeadingZero(text) {
+	return text.length > 1 && text[0] === '0';
+}
+
 function encrypt() {
 	try {
 		const plainText = document.getElementById("plain_text").value;
@@ -9,6 +13,9 @@ function encrypt() {
 			cipher_text = `${salt}-${cipher}`;
 		} else {
 			cipher_text = `${cipher}-${salt}`;
+		}
+		if (hasLeadingZero(plainText)) {
+			throw new Error("Leading zeros not allowed")
 		}
 		const simpleCrypto = new SimpleCrypto(cipher_text);
 		const encryptedText = simpleCrypto.encrypt(plainText);
