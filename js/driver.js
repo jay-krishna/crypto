@@ -2,6 +2,34 @@ function hasLeadingZero(text) {
 	return text.length > 1 && text[0] === '0';
 }
 
+function isEmpty(text) {
+	return text.length === 0;
+}
+
+function validateStringEncrypt(plainText, cipher, salt) {
+	if (isEmpty(plainText)) {
+		throw Error("Plain Text cannot be empty");
+	}
+	if (isEmpty(cipher)) {
+		throw Error("Cipher cannot be empty");
+	}
+	if (isEmpty(salt)) {
+		throw Error("Salt cannot be empty");
+	}
+}
+
+function validateStringDecrypt(encryptedText, cipher, salt) {
+	if (isEmpty(encryptedText)) {
+		throw Error("Encrypted Text cannot be empty");
+	}
+	if (isEmpty(cipher)) {
+		throw Error("Cipher cannot be empty");
+	}
+	if (isEmpty(salt)) {
+		throw Error("Salt cannot be empty");
+	}
+}
+
 function encrypt() {
 	try {
 		const plainText = document.getElementById("plain_text").value;
@@ -14,6 +42,7 @@ function encrypt() {
 		} else {
 			cipher_text = `${cipher}-${salt}`;
 		}
+		validateStringEncrypt(plainText, cipher, salt);
 		if (hasLeadingZero(plainText)) {
 			throw new Error("Leading zeros not allowed")
 		}
@@ -38,6 +67,7 @@ function decrypt() {
 		} else {
 			cipher_text = `${cipher}-${salt}`;
 		}
+		validateStringDecrypt(encryptedText, cipher, salt);
 		const simpleCrypto = new SimpleCrypto(cipher_text);
 		const decipherText = simpleCrypto.decrypt(encryptedText);
 		document.getElementById("plain_text").value = decipherText;
